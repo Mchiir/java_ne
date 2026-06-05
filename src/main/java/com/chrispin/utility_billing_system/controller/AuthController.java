@@ -24,6 +24,7 @@ import com.chrispin.utility_billing_system.service.PasswordService;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication", description = "User registration, login and password management")
 public class AuthController {
 
     private static final String SIGNUP = "Auth 1 - Sign-up & Verification";
