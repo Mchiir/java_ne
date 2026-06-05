@@ -34,11 +34,11 @@ public class JwtUtils {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + jwtExpirationMs);
         return Jwts.builder()
-                .subject(userDetails.getUsername())
+                .setSubject(userDetails.getUsername())
                 .claim("roles", roles)
                 .claim("uid", userDetails.getId())
-                .issuedAt(now)
-                .expiration(expiry)
+                .setIssuedAt(now)
+                .setExpiration(expiry)
                 .signWith(signingKey())
                 .compact();
     }
@@ -48,11 +48,11 @@ public class JwtUtils {
     }
 
     private Claims parseClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(signingKey())
+        return Jwts.parserBuilder()
+                .setSigningKey(signingKey())
                 .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public boolean validateToken(String token) {

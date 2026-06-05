@@ -1,9 +1,6 @@
 package com.chrispin.utility_billing_system.service;
 
-import com.chrispin.utility_billing_system.dto.request.LoginRequest;
-import com.chrispin.utility_billing_system.dto.request.OtpVerifyRequest;
-import com.chrispin.utility_billing_system.dto.request.ResendCodeRequest;
-import com.chrispin.utility_billing_system.dto.request.SignupRequest;
+import com.chrispin.utility_billing_system.dto.request.*;
 import com.chrispin.utility_billing_system.dto.response.JwtResponse;
 import com.chrispin.utility_billing_system.dto.response.MessageResponse;
 import com.chrispin.utility_billing_system.entity.Role;
@@ -11,6 +8,7 @@ import com.chrispin.utility_billing_system.entity.User;
 import com.chrispin.utility_billing_system.enums.ERole;
 import com.chrispin.utility_billing_system.enums.OtpPurpose;
 import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
 import com.chrispin.utility_billing_system.exception.DuplicateResourceException;
 import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
 import com.chrispin.utility_billing_system.repository.RoleRepository;
@@ -23,8 +21,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.ChangePasswordRequest;
-import rw.utility.billing.dto.request.ForgotPasswordRequest;
 
 import java.util.HashSet;
 import java.util.Set;
