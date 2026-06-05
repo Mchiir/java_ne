@@ -44,14 +44,9 @@ public class AuthService {
             throw new DuplicateResourceException("Email is already in use: " + request.email());
         }
 
+        // provide role
         Set<Role> roles = new HashSet<>();
-        if (request.roles() == null || request.roles().isEmpty()) {
-            roles.add(getRole(ERole.ROLE_CUSTOMER));
-        } else {
-            for (String r : request.roles()) {
-                roles.add(getRole(parseRole(r)));
-            }
-        }
+        roles.add(getRole(ERole.ROLE_CUSTOMER));
 
         User user = User.builder()
                 .fullNames(request.fullNames())

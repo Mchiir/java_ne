@@ -36,28 +36,24 @@ public class AuthController {
     // ----- Sign-up & Verification -----
 
     @PostMapping("/signup")
-    @Tag(name = SIGNUP, description = "Register and confirm a new account via emailed code")
     @Operation(summary = "Register a new user (emails a verification code)")
     public ResponseEntity<MessageResponse> signup(@Valid @RequestBody SignupRequest request) {
         return ResponseEntity.ok(authService.signup(request));
     }
 
     @PostMapping("/verify")
-    @Tag(name = SIGNUP)
     @Operation(summary = "Verify the email with the signup code (returns a JWT)")
     public ResponseEntity<JwtResponse> verify(@Valid @RequestBody OtpVerifyRequest request) {
         return ResponseEntity.ok(authService.verifyAccount(request));
     }
 
     @PostMapping("/verify/resend")
-    @Tag(name = SIGNUP)
     @Operation(summary = "Resend the email-verification code")
     public ResponseEntity<MessageResponse> resendVerification(@Valid @RequestBody OtpRequest request) {
         return ResponseEntity.ok(authService.resendVerification(request));
     }
 
     @PostMapping("/code/resend")
-    @Tag(name = SIGNUP)
     @Operation(summary = "Request a fresh code for any flow "
             + "(purpose = ACCOUNT_VERIFICATION | PASSWORD_RESET); invalidates the previous code")
     public ResponseEntity<MessageResponse> resendCode(@Valid @RequestBody ResendCodeRequest request) {
@@ -67,7 +63,6 @@ public class AuthController {
     // ----- Login (email + password) -----
 
     @PostMapping("/login")
-    @Tag(name = LOGIN, description = "Email + password login")
     @Operation(summary = "Authenticate with email + password and obtain a JWT (requires verified email)")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
@@ -76,21 +71,18 @@ public class AuthController {
     // ----- Password (forgot / reset / change) -----
 
     @PostMapping("/password/forgot")
-    @Tag(name = PASSWORD, description = "Forgot, reset and change password")
     @Operation(summary = "Request a password-reset code by email")
     public ResponseEntity<MessageResponse> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         return ResponseEntity.ok(passwordService.forgotPassword(request));
     }
 
     @PostMapping("/password/reset")
-    @Tag(name = PASSWORD)
     @Operation(summary = "Reset password using the emailed code")
     public ResponseEntity<MessageResponse> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         return ResponseEntity.ok(passwordService.resetPassword(request));
     }
 
     @PostMapping("/password/change")
-    @Tag(name = PASSWORD)
     @Operation(summary = "Change password for the authenticated user")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<MessageResponse> changePassword(@Valid @RequestBody ChangePasswordRequest request,

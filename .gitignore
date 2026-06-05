@@ -31,7 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-*.prompt*
 *.env
-*kiro/
-application-secret.properties
+run.md
