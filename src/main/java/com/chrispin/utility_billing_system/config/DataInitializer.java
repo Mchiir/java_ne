@@ -47,9 +47,9 @@ public class DataInitializer implements CommandLineRunner {
 
         // Default staff accounts (pre-verified). Customers self-register via signup.
         ensureUser(adminEmail, adminFullNames, adminPhone, adminPassword, ERole.ROLE_ADMIN);
-        ensureUser("operator@utility.rw", "Default Operator", "+250780000001",
+        ensureUser("operator@utilitybilling.com", "Default Operator", "+250781234567",
                 "Operator@123", ERole.ROLE_OPERATOR);
-        ensureUser("finance@utility.rw", "Default Finance", "+250780000002",
+        ensureUser("finance@utilitybilling.com", "Default Finance", "+250781234568",
                 "Finance@123", ERole.ROLE_FINANCE);
     }
 
