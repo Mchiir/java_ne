@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@meterId = 1
+@customerId = 1
+
+### List all meters
+GET {{baseUrl}}/api/meters
+Authorization: Bearer {{authToken}}
+
+### Register a new meter for a customer
+POST {{baseUrl}}/api/meters
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "meterNumber": "WTR-2026-9948",
+  "meterType": "WATER",
+  "installationDate": "2026-06-05",
+  "customerId": {{customerId}}
+}
+
+### Get a meter by id
+GET {{baseUrl}}/api/meters/{{meterId}}
+Authorization: Bearer {{authToken}}
+
+### List meters belonging to a customer
+GET {{baseUrl}}/api/meters/customer/{{customerId}}
+Authorization: Bearer {{authToken}}
+
+### Activate / deactivate a meter
+PATCH {{baseUrl}}/api/meters/{{meterId}}/status?status=ACTIVE
+Authorization: Bearer {{authToken}}

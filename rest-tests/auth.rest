@@ -1,0 +1,80 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+
+### Register a new user (emails a verification code)
+POST {{baseUrl}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "fullNames": "John Doe",
+  "email": "johndoe@example.com",
+  "phoneNumber": "+250788000000",
+  "password": "SecurePassword123"
+}
+
+### Verify the email with the signup code (returns a JWT)
+POST {{baseUrl}}/api/auth/verify
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "code": "123456"
+}
+
+### Resend the email-verification code
+POST {{baseUrl}}/api/auth/verify/resend
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com"
+}
+
+### Authenticate and obtain a JWT
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "password": "SecurePassword123"
+}
+
+### Request a fresh code for any flow
+POST {{baseUrl}}/api/auth/code/resend
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "purpose": "ACCOUNT_VERIFICATION" 
+}
+
+### Request a password-reset code by email
+POST {{baseUrl}}/api/auth/password/forgot
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com"
+}
+
+### Reset password using the emailed code
+POST {{baseUrl}}/api/auth/password/reset
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "code": "654321",
+  "newPassword": "NewSecurePassword123"
+}
+
+### Change password for the authenticated user
+POST {{baseUrl}}/api/auth/password/change
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "currentPassword": "SecurePassword123",
+  "newPassword": "NewSecurePassword123"
+}
+
+### Get my profile info
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{authToken}}

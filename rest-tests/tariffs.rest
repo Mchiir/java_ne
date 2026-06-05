@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@tariffId = 1
+
+### List all tariffs
+GET {{baseUrl}}/api/tariffs
+Authorization: Bearer {{authToken}}
+
+### Configure a new tariff version (ROLE_ADMIN)
+POST {{baseUrl}}/api/tariffs
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "meterType": "WATER",
+  "consumptionRate": 320.50,
+  "fixedServiceCharge": 1000.00,
+  "vatRate": 18.0,
+  "penaltyRate": 5.0,
+  "effectiveFrom": "2026-06-01"
+}
+
+### Get a tariff by id
+GET {{baseUrl}}/api/tariffs/{{tariffId}}
+Authorization: Bearer {{authToken}}
+
+### List tariff versions for a meter type
+GET {{baseUrl}}/api/tariffs/type/WATER
+Authorization: Bearer {{authToken}}
+
+### Enable / disable a tariff version
+PATCH {{baseUrl}}/api/tariffs/{{tariffId}}/active?active=true
+Authorization: Bearer {{authToken}}

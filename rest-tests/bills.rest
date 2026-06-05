@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@billId = 1
+@customerId = 1
+
+### List all bills
+GET {{baseUrl}}/api/bills
+Authorization: Bearer {{authToken}}
+
+### Generate a postpaid bill from a meter reading
+POST {{baseUrl}}/api/bills/generate
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "meterReadingId": 1,
+  "dueDate": "2026-06-25"
+}
+
+### Get a bill by id
+GET {{baseUrl}}/api/bills/{{billId}}
+Authorization: Bearer {{authToken}}
+
+### View my own bills (ROLE_CUSTOMER)
+GET {{baseUrl}}/api/bills/me
+Authorization: Bearer {{authToken}}
+
+### List bills for a customer
+GET {{baseUrl}}/api/bills/customer/{{customerId}}
+Authorization: Bearer {{authToken}}
+
+### Approve a bill (ROLE_ADMIN / ROLE_FINANCE)
+PATCH {{baseUrl}}/api/bills/{{billId}}/approve
+Authorization: Bearer {{authToken}}

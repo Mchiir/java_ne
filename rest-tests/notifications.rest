@@ -1,0 +1,15 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@customerId = 1
+
+### List all notifications
+GET {{baseUrl}}/api/notifications
+Authorization: Bearer {{authToken}}
+
+### View my own notifications (ROLE_CUSTOMER)
+GET {{baseUrl}}/api/notifications/me
+Authorization: Bearer {{authToken}}
+
+### List notifications for a customer
+GET {{baseUrl}}/api/notifications/customer/{{customerId}}
+Authorization: Bearer {{authToken}}

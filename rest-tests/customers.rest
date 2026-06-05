@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@customerId = 1
+
+### List all customers
+GET {{baseUrl}}/api/customers
+Authorization: Bearer {{authToken}}
+
+### Register a new customer
+POST {{baseUrl}}/api/customers
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "fullNames": "Jane Customer",
+  "nationalId": "1199080012345678",
+  "email": "jane@example.com",
+  "phoneNumber": "+250788111222",
+  "address": "Kigali, Rwanda"
+}
+
+### Get a customer by id
+GET {{baseUrl}}/api/customers/{{customerId}}
+Authorization: Bearer {{authToken}}
+
+### Update a customer
+PUT {{baseUrl}}/api/customers/{{customerId}}
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "fullNames": "Jane Customer Updated",
+  "nationalId": "1199080012345678",
+  "email": "jane.updated@example.com",
+  "phoneNumber": "+250788111222",
+  "address": "Kigali, Sector 3"
+}
+
+### Activate / deactivate a customer
+PATCH {{baseUrl}}/api/customers/{{customerId}}/status?status=ACTIVE
+Authorization: Bearer {{authToken}}

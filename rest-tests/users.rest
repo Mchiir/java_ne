@@ -1,0 +1,15 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@userId = 1
+
+### List all users (ROLE_ADMIN)
+GET {{baseUrl}}/api/users
+Authorization: Bearer {{authToken}}
+
+### Get a user by id
+GET {{baseUrl}}/api/users/{{userId}}
+Authorization: Bearer {{authToken}}
+
+### Activate / deactivate a user
+PATCH {{baseUrl}}/api/users/{{userId}}/status?status=ACTIVE
+Authorization: Bearer {{authToken}}

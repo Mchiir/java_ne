@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@billId = 1
+
+### List all payments
+GET {{baseUrl}}/api/payments
+Authorization: Bearer {{authToken}}
+
+### Record a payment against a bill (ROLE_FINANCE)
+POST {{baseUrl}}/api/payments
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "billReference": "BILL-2026-001",
+  "amountPaid": 15450.00,
+  "paymentMethod": "MOBILE_MONEY",
+  "reference": "TXN-MOMO-99482"
+}
+
+### View my own payment history (ROLE_CUSTOMER)
+GET {{baseUrl}}/api/payments/me
+Authorization: Bearer {{authToken}}
+
+### List payments for a bill
+GET {{baseUrl}}/api/payments/bill/{{billId}}
+Authorization: Bearer {{authToken}}

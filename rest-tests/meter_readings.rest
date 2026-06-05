@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:8888
+@authToken = your_jwt_token_here
+@readingId = 1
+@meterId = 1
+
+### List all readings
+GET {{baseUrl}}/api/readings
+Authorization: Bearer {{authToken}}
+
+### Capture a meter reading (ROLE_OPERATOR)
+POST {{baseUrl}}/api/readings
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "meterId": {{meterId}},
+  "previousReading": 1240.0,
+  "currentReading": 1285.5,
+  "readingDate": "2026-06-05"
+}
+
+### Get a reading by id
+GET {{baseUrl}}/api/readings/{{readingId}}
+Authorization: Bearer {{authToken}}
+
+### List readings for a meter
+GET {{baseUrl}}/api/readings/meter/{{meterId}}
+Authorization: Bearer {{authToken}}
