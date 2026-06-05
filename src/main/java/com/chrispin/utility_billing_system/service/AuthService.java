@@ -3,6 +3,7 @@ package com.chrispin.utility_billing_system.service;
 import com.chrispin.utility_billing_system.dto.request.*;
 import com.chrispin.utility_billing_system.dto.response.JwtResponse;
 import com.chrispin.utility_billing_system.dto.response.MessageResponse;
+import com.chrispin.utility_billing_system.dto.response.UserResponse;
 import com.chrispin.utility_billing_system.entity.Role;
 import com.chrispin.utility_billing_system.entity.User;
 import com.chrispin.utility_billing_system.enums.ERole;
@@ -149,5 +150,23 @@ public class AuthService {
         } catch (IllegalArgumentException e) {
             throw new BadRequestException("Unknown role: " + raw);
         }
+    }
+
+    public UserResponse getProfile() {
+        Authentication authentication = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication();
+        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
+        User user = userRepository.findByEmail(principal.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", principal.getUsername()));
+        return new UserResponse(
+                user.getId(),
+                user.getFullNames(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                user.getStatus(),
+                user.getRoles().stream()
+                        .map(r -> r.getName().name())
+                        .toList()
+        );
     }
 }

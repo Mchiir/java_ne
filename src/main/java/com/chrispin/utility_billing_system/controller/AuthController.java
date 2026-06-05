@@ -1,5 +1,6 @@
 package com.chrispin.utility_billing_system.controller;
 
+import com.chrispin.utility_billing_system.dto.response.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -24,7 +25,7 @@ import com.chrispin.utility_billing_system.service.PasswordService;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@Tag(name = "Authentication", description = "User registration, login and password management")
+@Tag(name = "Auth", description = "User registration, login and password management")
 public class AuthController {
 
     private static final String SIGNUP = "Auth 1 - Sign-up & Verification";
@@ -89,5 +90,13 @@ public class AuthController {
     public ResponseEntity<MessageResponse> changePassword(@Valid @RequestBody ChangePasswordRequest request,
                                                           Authentication authentication) {
         return ResponseEntity.ok(passwordService.changePassword(authentication.getName(), request));
+    }
+
+    // ----- Get profile info -----
+    @GetMapping("/me")
+    @Operation(summary = "Get my profile info")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<UserResponse> getProfile() {
+        return ResponseEntity.ok(authService.getProfile());
     }
 }
