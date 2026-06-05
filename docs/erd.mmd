@@ -1,0 +1,104 @@
+erDiagram
+    USERS ||--o{ CUSTOMERS : "login account"
+    USERS }o--o{ ROLES : "user_roles"
+    CUSTOMERS ||--o{ METERS : "owns"
+    METERS ||--o{ METER_READINGS : "records"
+    CUSTOMERS ||--o{ BILLS : "billed to"
+    METERS ||--o{ BILLS : "metered by"
+    METER_READINGS ||--|| BILLS : "basis of"
+    TARIFFS ||--o{ BILLS : "priced by"
+    USERS ||--o{ BILLS : "approved by"
+    BILLS ||--o{ PAYMENTS : "settled by"
+    CUSTOMERS ||--o{ NOTIFICATIONS : "receives"
+    BILLS ||--o{ NOTIFICATIONS : "raises"
+
+    USERS {
+        bigint id PK
+        string full_names
+        string email UK
+        string phone_number
+        string password
+        string status
+    }
+    ROLES {
+        bigint id PK
+        string name UK
+    }
+    CUSTOMERS {
+        bigint id PK
+        string full_names
+        string national_id UK
+        string email
+        string phone_number
+        string address
+        string status
+        bigint user_id FK
+    }
+    METERS {
+        bigint id PK
+        string meter_number UK
+        string meter_type
+        date installation_date
+        string status
+        bigint customer_id FK
+    }
+    METER_READINGS {
+        bigint id PK
+        bigint meter_id FK
+        decimal previous_reading
+        decimal current_reading
+        decimal consumption
+        date reading_date
+        int reading_month
+        int reading_year
+    }
+    TARIFFS {
+        bigint id PK
+        int version
+        string meter_type
+        decimal consumption_rate
+        decimal fixed_service_charge
+        decimal vat_rate
+        decimal penalty_rate
+        date effective_from
+        boolean active
+    }
+    BILLS {
+        bigint id PK
+        string bill_reference UK
+        bigint customer_id FK
+        bigint meter_id FK
+        bigint meter_reading_id FK
+        bigint tariff_id FK
+        int billing_month
+        int billing_year
+        decimal consumption
+        decimal energy_amount
+        decimal service_charge
+        decimal tax_amount
+        decimal penalty_amount
+        decimal total_amount
+        decimal amount_paid
+        decimal outstanding_balance
+        string status
+        date generated_date
+        date due_date
+        bigint approved_by FK
+    }
+    PAYMENTS {
+        bigint id PK
+        bigint bill_id FK
+        decimal amount_paid
+        string payment_method
+        timestamp payment_date
+        string reference
+    }
+    NOTIFICATIONS {
+        bigint id PK
+        bigint customer_id FK
+        bigint bill_id FK
+        text message
+        string type
+        string status
+        timestamp created_at
+    }

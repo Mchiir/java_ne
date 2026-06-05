@@ -1,0 +1,20 @@
+flowchart TD
+    Client["Client / Swagger UI"] -->|HTTP + JWT| Filter["AuthTokenFilter\n(validates JWT)"]
+    Filter --> Security["Spring Security\nWebSecurityConfig\n@PreAuthorize role gates"]
+    Security -->|401/403| Client
+    Security --> Controller["@RestController\nAuth / User / Customer / Meter /\nReading / Tariff / Bill / Payment / Notification"]
+    Controller --> Service["@Service\nbusiness-rule enforcement"]
+    Service --> Repo["Spring Data JPA\nJpaRepository"]
+    Repo --> DB[("PostgreSQL\nutility_billing")]
+    DB -->|"AFTER INSERT bills"| Trg1["Trigger:\nfn_notify_on_bill_insert"]
+    DB -->|"BEFORE UPDATE bills (paid)"| Trg2["Trigger:\nfn_notify_on_full_payment"]
+    Trg1 --> Notif[("notifications")]
+    Trg2 --> Notif
+    Service --> Controller
+    Controller -->|JSON DTO| Client
+
+    subgraph Auth["Authentication flow"]
+        Login["POST /api/auth/login"] --> AuthMgr["AuthenticationManager\n+ BCrypt"]
+        AuthMgr --> Jwt["JwtUtils.generateToken"]
+        Jwt --> Token["JWT returned to client"]
+    end

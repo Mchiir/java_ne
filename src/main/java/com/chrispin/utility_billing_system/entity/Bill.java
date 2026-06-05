@@ -1,0 +1,90 @@
+package rw.utility.billing.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import rw.utility.billing.enums.BillStatus;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "bills",
+        uniqueConstraints = @UniqueConstraint(columnNames = "bill_reference"))
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Bill {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "bill_reference", nullable = false, unique = true)
+    private String billReference;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "meter_id", nullable = false)
+    private Meter meter;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "meter_reading_id", nullable = false, unique = true)
+    private MeterReading meterReading;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tariff_id", nullable = false)
+    private Tariff tariff;
+
+    @Column(name = "billing_month", nullable = false)
+    private Integer billingMonth;
+
+    @Column(name = "billing_year", nullable = false)
+    private Integer billingYear;
+
+    @Column(nullable = false, precision = 18, scale = 2)
+    private BigDecimal consumption;
+
+    /** consumption * tariff.consumptionRate */
+    @Column(name = "energy_amount", nullable = false, precision = 18, scale = 2)
+    private BigDecimal energyAmount;
+
+    @Column(name = "service_charge", nullable = false, precision = 18, scale = 2)
+    private BigDecimal serviceCharge;
+
+    @Column(name = "tax_amount", nullable = false, precision = 18, scale = 2)
+    private BigDecimal taxAmount;
+
+    @Column(name = "penalty_amount", nullable = false, precision = 18, scale = 2)
+    @Builder.Default
+    private BigDecimal penaltyAmount = BigDecimal.ZERO;
+
+    @Column(name = "total_amount", nullable = false, precision = 18, scale = 2)
+    private BigDecimal totalAmount;
+
+    @Column(name = "amount_paid", nullable = false, precision = 18, scale = 2)
+    @Builder.Default
+    private BigDecimal amountPaid = BigDecimal.ZERO;
+
+    @Column(name = "outstanding_balance", nullable = false, precision = 18, scale = 2)
+    private BigDecimal outstandingBalance;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    @Builder.Default
+    private BillStatus status = BillStatus.PENDING;
+
+    @Column(name = "generated_date", nullable = false)
+    private LocalDate generatedDate;
+
+    @Column(name = "due_date", nullable = false)
+    private LocalDate dueDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    private User approvedBy;
+}

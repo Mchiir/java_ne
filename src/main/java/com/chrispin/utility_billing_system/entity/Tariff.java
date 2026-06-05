@@ -1,0 +1,55 @@
+package rw.utility.billing.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import rw.utility.billing.enums.MeterType;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+/**
+ * A versioned tariff. New tariffs are created as new versions and apply only to
+ * billing cycles on/after {@code effectiveFrom}; existing bills keep their tariff.
+ */
+@Entity
+@Table(name = "tariffs")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Tariff {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private Integer version;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "meter_type", nullable = false, length = 20)
+    private MeterType meterType;
+
+    /** Price per consumed unit (FRW per m3 / kWh). */
+    @Column(name = "consumption_rate", nullable = false, precision = 18, scale = 4)
+    private BigDecimal consumptionRate;
+
+    @Column(name = "fixed_service_charge", nullable = false, precision = 18, scale = 2)
+    private BigDecimal fixedServiceCharge;
+
+    /** VAT / tax percentage, e.g. 18.00 for 18%. */
+    @Column(name = "vat_rate", nullable = false, precision = 5, scale = 2)
+    private BigDecimal vatRate;
+
+    /** Late-payment penalty percentage applied to outstanding amount. */
+    @Column(name = "penalty_rate", nullable = false, precision = 5, scale = 2)
+    private BigDecimal penaltyRate;
+
+    @Column(name = "effective_from", nullable = false)
+    private LocalDate effectiveFrom;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean active = true;
+}
