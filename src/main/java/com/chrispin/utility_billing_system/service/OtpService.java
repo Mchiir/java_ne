@@ -1,13 +1,13 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.entity.OtpToken;
-import rw.utility.billing.enums.OtpPurpose;
-import rw.utility.billing.exception.BadRequestException;
-import rw.utility.billing.repository.OtpTokenRepository;
+import com.chrispin.utility_billing_system.entity.OtpToken;
+import com.chrispin.utility_billing_system.enums.OtpPurpose;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
+import com.chrispin.utility_billing_system.repository.OtpTokenRepository;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;

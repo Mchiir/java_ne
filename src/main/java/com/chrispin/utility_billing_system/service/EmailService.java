@@ -1,4 +1,4 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

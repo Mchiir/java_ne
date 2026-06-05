@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.response.NotificationResponse;
-import rw.utility.billing.service.NotificationService;
+import com.chrispin.utility_billing_system.dto.response.NotificationResponse;
+import com.chrispin.utility_billing_system.service.NotificationService;
 
 import java.util.List;
 

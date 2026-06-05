@@ -1,17 +1,17 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.MeterReadingRequest;
-import rw.utility.billing.dto.response.MeterReadingResponse;
-import rw.utility.billing.entity.Meter;
-import rw.utility.billing.entity.MeterReading;
-import rw.utility.billing.enums.Status;
-import rw.utility.billing.exception.BadRequestException;
-import rw.utility.billing.exception.ResourceNotFoundException;
-import rw.utility.billing.repository.MeterReadingRepository;
-import rw.utility.billing.repository.MeterRepository;
+import com.chrispin.utility_billing_system.dto.request.MeterReadingRequest;
+import com.chrispin.utility_billing_system.dto.response.MeterReadingResponse;
+import com.chrispin.utility_billing_system.entity.Meter;
+import com.chrispin.utility_billing_system.entity.MeterReading;
+import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
+import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
+import com.chrispin.utility_billing_system.repository.MeterReadingRepository;
+import com.chrispin.utility_billing_system.repository.MeterRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

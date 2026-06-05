@@ -1,4 +1,4 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
 import java.util.List;
 

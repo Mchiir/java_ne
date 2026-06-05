@@ -1,11 +1,11 @@
-package rw.utility.billing.repository;
+package com.chrispin.utility_billing_system.repository;
 
+import com.chrispin.utility_billing_system.entity.OtpToken;
+import com.chrispin.utility_billing_system.enums.OtpPurpose;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import rw.utility.billing.entity.OtpToken;
-import rw.utility.billing.enums.OtpPurpose;
 
 import java.util.Optional;
 

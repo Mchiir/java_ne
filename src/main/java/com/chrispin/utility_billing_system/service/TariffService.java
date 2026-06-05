@@ -1,14 +1,14 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.TariffRequest;
-import rw.utility.billing.dto.response.TariffResponse;
-import rw.utility.billing.entity.Tariff;
-import rw.utility.billing.enums.MeterType;
-import rw.utility.billing.exception.ResourceNotFoundException;
-import rw.utility.billing.repository.TariffRepository;
+import com.chrispin.utility_billing_system.dto.request.TariffRequest;
+import com.chrispin.utility_billing_system.dto.response.TariffResponse;
+import com.chrispin.utility_billing_system.entity.Tariff;
+import com.chrispin.utility_billing_system.enums.MeterType;
+import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
+import com.chrispin.utility_billing_system.repository.TariffRepository;
 
 import java.time.LocalDate;
 import java.util.List;

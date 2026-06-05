@@ -8,18 +8,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.request.ChangePasswordRequest;
-import rw.utility.billing.dto.request.ForgotPasswordRequest;
-import rw.utility.billing.dto.request.LoginRequest;
-import rw.utility.billing.dto.request.OtpRequest;
-import rw.utility.billing.dto.request.OtpVerifyRequest;
-import rw.utility.billing.dto.request.ResendCodeRequest;
-import rw.utility.billing.dto.request.ResetPasswordRequest;
-import rw.utility.billing.dto.request.SignupRequest;
-import rw.utility.billing.dto.response.JwtResponse;
-import rw.utility.billing.dto.response.MessageResponse;
-import rw.utility.billing.service.AuthService;
-import rw.utility.billing.service.PasswordService;
+import com.chrispin.utility_billing_system.dto.request.ChangePasswordRequest;
+import com.chrispin.utility_billing_system.dto.request.ForgotPasswordRequest;
+import com.chrispin.utility_billing_system.dto.request.LoginRequest;
+import com.chrispin.utility_billing_system.dto.request.OtpRequest;
+import com.chrispin.utility_billing_system.dto.request.OtpVerifyRequest;
+import com.chrispin.utility_billing_system.dto.request.ResendCodeRequest;
+import com.chrispin.utility_billing_system.dto.request.ResetPasswordRequest;
+import com.chrispin.utility_billing_system.dto.request.SignupRequest;
+import com.chrispin.utility_billing_system.dto.response.JwtResponse;
+import com.chrispin.utility_billing_system.dto.response.MessageResponse;
+import com.chrispin.utility_billing_system.service.AuthService;
+import com.chrispin.utility_billing_system.service.PasswordService;
 
 @RestController
 @RequestMapping("/api/auth")

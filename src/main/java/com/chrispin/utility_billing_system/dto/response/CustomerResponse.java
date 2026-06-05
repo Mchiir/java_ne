@@ -1,7 +1,8 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.Customer;
-import rw.utility.billing.enums.Status;
+
+import com.chrispin.utility_billing_system.entity.Customer;
+import com.chrispin.utility_billing_system.enums.Status;
 
 public record CustomerResponse(
         Long id,

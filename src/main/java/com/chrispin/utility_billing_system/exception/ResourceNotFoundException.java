@@ -1,4 +1,4 @@
-package rw.utility.billing.exception;
+package com.chrispin.utility_billing_system.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

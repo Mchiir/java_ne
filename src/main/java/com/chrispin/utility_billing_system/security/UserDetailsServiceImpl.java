@@ -1,13 +1,13 @@
-package rw.utility.billing.security;
+package com.chrispin.utility_billing_system.security;
 
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.entity.User;
-import rw.utility.billing.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

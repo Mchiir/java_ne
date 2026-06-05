@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.request.MeterRequest;
-import rw.utility.billing.dto.response.MeterResponse;
-import rw.utility.billing.enums.Status;
-import rw.utility.billing.service.MeterService;
+import com.chrispin.utility_billing_system.dto.request.MeterRequest;
+import com.chrispin.utility_billing_system.dto.response.MeterResponse;
+import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.service.MeterService;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package rw.utility.billing.security;
+package com.chrispin.utility_billing_system.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;

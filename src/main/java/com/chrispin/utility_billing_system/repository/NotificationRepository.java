@@ -1,7 +1,7 @@
-package rw.utility.billing.repository;
+package com.chrispin.utility_billing_system.repository;
 
+import com.chrispin.utility_billing_system.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
-import rw.utility.billing.entity.Notification;
 
 import java.util.List;
 

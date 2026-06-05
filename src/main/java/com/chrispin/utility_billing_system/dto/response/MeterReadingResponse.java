@@ -1,6 +1,7 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.MeterReading;
+
+import com.chrispin.utility_billing_system.entity.MeterReading;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

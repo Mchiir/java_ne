@@ -1,7 +1,7 @@
-package rw.utility.billing.repository;
+package com.chrispin.utility_billing_system.repository;
 
+import com.chrispin.utility_billing_system.entity.Meter;
 import org.springframework.data.jpa.repository.JpaRepository;
-import rw.utility.billing.entity.Meter;
 
 import java.util.List;
 

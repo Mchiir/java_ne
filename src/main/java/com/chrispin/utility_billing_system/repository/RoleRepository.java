@@ -1,8 +1,8 @@
-package rw.utility.billing.repository;
+package com.chrispin.utility_billing_system.repository;
 
+import com.chrispin.utility_billing_system.entity.Role;
+import com.chrispin.utility_billing_system.enums.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
-import rw.utility.billing.entity.Role;
-import rw.utility.billing.enums.ERole;
 
 import java.util.Optional;
 

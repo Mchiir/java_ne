@@ -5,9 +5,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.response.UserResponse;
-import rw.utility.billing.enums.Status;
-import rw.utility.billing.service.UserService;
+import com.chrispin.utility_billing_system.dto.response.UserResponse;
+import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.service.UserService;
 
 import java.util.List;
 

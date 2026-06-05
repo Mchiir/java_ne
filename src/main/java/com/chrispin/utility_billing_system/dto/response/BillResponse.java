@@ -1,7 +1,7 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.Bill;
-import rw.utility.billing.enums.BillStatus;
+import com.chrispin.utility_billing_system.entity.Bill;
+import com.chrispin.utility_billing_system.enums.BillStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package rw.utility.billing.exception;
+package com.chrispin.utility_billing_system.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

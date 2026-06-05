@@ -1,4 +1,4 @@
-package rw.utility.billing.dto.request;
+package com.chrispin.utility_billing_system.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;

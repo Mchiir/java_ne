@@ -1,4 +1,4 @@
-package rw.utility.billing.exception;
+package com.chrispin.utility_billing_system.exception;
 
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {

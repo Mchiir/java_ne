@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.request.MeterReadingRequest;
-import rw.utility.billing.dto.response.MeterReadingResponse;
-import rw.utility.billing.service.MeterReadingService;
+import com.chrispin.utility_billing_system.dto.request.MeterReadingRequest;
+import com.chrispin.utility_billing_system.dto.response.MeterReadingResponse;
+import com.chrispin.utility_billing_system.service.MeterReadingService;
 
 import java.util.List;
 

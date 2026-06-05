@@ -1,18 +1,18 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.ChangePasswordRequest;
-import rw.utility.billing.dto.request.ForgotPasswordRequest;
-import rw.utility.billing.dto.request.ResetPasswordRequest;
-import rw.utility.billing.dto.response.MessageResponse;
-import rw.utility.billing.entity.User;
-import rw.utility.billing.enums.OtpPurpose;
-import rw.utility.billing.exception.BadRequestException;
-import rw.utility.billing.exception.ResourceNotFoundException;
-import rw.utility.billing.repository.UserRepository;
+import com.chrispin.utility_billing_system.dto.request.ChangePasswordRequest;
+import com.chrispin.utility_billing_system.dto.request.ForgotPasswordRequest;
+import com.chrispin.utility_billing_system.dto.request.ResetPasswordRequest;
+import com.chrispin.utility_billing_system.dto.response.MessageResponse;
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
+import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
+import com.chrispin.utility_billing_system.repository.UserRepository;
+import com.chrispin.utility_billing_system.enums.OtpPurpose;
 
 @Service
 @RequiredArgsConstructor

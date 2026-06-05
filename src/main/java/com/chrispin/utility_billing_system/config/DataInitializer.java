@@ -7,12 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import rw.utility.billing.entity.Role;
-import rw.utility.billing.entity.User;
-import rw.utility.billing.enums.ERole;
-import rw.utility.billing.enums.Status;
-import rw.utility.billing.repository.RoleRepository;
-import rw.utility.billing.repository.UserRepository;
+import com.chrispin.utility_billing_system.entity.Role;
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.enums.ERole;
+import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.repository.RoleRepository;
+import com.chrispin.utility_billing_system.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;

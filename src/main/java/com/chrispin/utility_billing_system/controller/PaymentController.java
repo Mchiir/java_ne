@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.request.PaymentRequest;
-import rw.utility.billing.dto.response.PaymentResponse;
-import rw.utility.billing.service.PaymentService;
+import com.chrispin.utility_billing_system.dto.request.PaymentRequest;
+import com.chrispin.utility_billing_system.dto.response.PaymentResponse;
+import com.chrispin.utility_billing_system.service.PaymentService;
 
 import java.util.List;
 

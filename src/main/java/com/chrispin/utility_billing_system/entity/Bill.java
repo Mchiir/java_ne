@@ -1,8 +1,8 @@
-package rw.utility.billing.entity;
+package com.chrispin.utility_billing_system.entity;
 
+import com.chrispin.utility_billing_system.enums.BillStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import rw.utility.billing.enums.BillStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

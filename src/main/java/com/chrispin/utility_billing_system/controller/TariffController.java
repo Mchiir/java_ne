@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import rw.utility.billing.dto.request.TariffRequest;
-import rw.utility.billing.dto.response.TariffResponse;
-import rw.utility.billing.enums.MeterType;
-import rw.utility.billing.service.TariffService;
+import com.chrispin.utility_billing_system.dto.request.TariffRequest;
+import com.chrispin.utility_billing_system.dto.response.TariffResponse;
+import com.chrispin.utility_billing_system.enums.MeterType;
+import com.chrispin.utility_billing_system.service.TariffService;
 
 import java.util.List;
 

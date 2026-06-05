@@ -1,7 +1,9 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.User;
-import rw.utility.billing.enums.Status;
+
+
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.enums.Status;
 
 import java.util.List;
 

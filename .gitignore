@@ -34,3 +34,4 @@ build/
 *.prompt*
 *.env
 *kiro/
+application-secret.properties

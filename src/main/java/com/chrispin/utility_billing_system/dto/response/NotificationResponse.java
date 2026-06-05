@@ -1,7 +1,7 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.Notification;
-import rw.utility.billing.enums.NotificationStatus;
+import com.chrispin.utility_billing_system.entity.Notification;
+import com.chrispin.utility_billing_system.enums.NotificationStatus;
 
 import java.time.LocalDateTime;
 

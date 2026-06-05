@@ -1,4 +1,4 @@
-package rw.utility.billing.util;
+package com.chrispin.utility_billing_system.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

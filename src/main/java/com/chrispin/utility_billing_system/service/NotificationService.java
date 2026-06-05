@@ -1,10 +1,10 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.response.NotificationResponse;
-import rw.utility.billing.repository.NotificationRepository;
+import com.chrispin.utility_billing_system.dto.response.NotificationResponse;
+import com.chrispin.utility_billing_system.repository.NotificationRepository;
 
 import java.util.List;
 

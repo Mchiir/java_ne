@@ -1,18 +1,18 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.PaymentRequest;
-import rw.utility.billing.dto.response.PaymentResponse;
-import rw.utility.billing.entity.Bill;
-import rw.utility.billing.entity.Payment;
-import rw.utility.billing.enums.BillStatus;
-import rw.utility.billing.exception.BadRequestException;
-import rw.utility.billing.exception.ResourceNotFoundException;
-import rw.utility.billing.repository.BillRepository;
-import rw.utility.billing.repository.PaymentRepository;
-import rw.utility.billing.util.NotificationMessages;
+import com.chrispin.utility_billing_system.dto.request.PaymentRequest;
+import com.chrispin.utility_billing_system.dto.response.PaymentResponse;
+import com.chrispin.utility_billing_system.entity.Bill;
+import com.chrispin.utility_billing_system.entity.Payment;
+import com.chrispin.utility_billing_system.enums.BillStatus;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
+import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
+import com.chrispin.utility_billing_system.repository.BillRepository;
+import com.chrispin.utility_billing_system.repository.PaymentRepository;
+import com.chrispin.utility_billing_system.util.NotificationMessages;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

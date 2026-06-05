@@ -1,11 +1,11 @@
-package rw.utility.billing.security;
+package com.chrispin.utility_billing_system.security;
 
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.enums.Status;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import rw.utility.billing.entity.User;
-import rw.utility.billing.enums.Status;
 
 import java.util.Collection;
 import java.util.List;

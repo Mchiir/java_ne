@@ -1,4 +1,4 @@
-package rw.utility.billing.entity;
+package com.chrispin.utility_billing_system.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

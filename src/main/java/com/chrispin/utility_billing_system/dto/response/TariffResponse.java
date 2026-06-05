@@ -1,7 +1,9 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.Tariff;
-import rw.utility.billing.enums.MeterType;
+
+
+import com.chrispin.utility_billing_system.entity.Tariff;
+import com.chrispin.utility_billing_system.enums.MeterType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

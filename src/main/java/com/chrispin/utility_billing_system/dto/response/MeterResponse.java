@@ -1,8 +1,10 @@
-package rw.utility.billing.dto.response;
+package com.chrispin.utility_billing_system.dto.response;
 
-import rw.utility.billing.entity.Meter;
-import rw.utility.billing.enums.MeterType;
-import rw.utility.billing.enums.Status;
+
+
+import com.chrispin.utility_billing_system.entity.Meter;
+import com.chrispin.utility_billing_system.enums.MeterType;
+import com.chrispin.utility_billing_system.enums.Status;
 
 import java.time.LocalDate;
 

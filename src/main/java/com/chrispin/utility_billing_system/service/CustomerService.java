@@ -1,16 +1,16 @@
-package rw.utility.billing.service;
+package com.chrispin.utility_billing_system.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rw.utility.billing.dto.request.CustomerRequest;
-import rw.utility.billing.dto.response.CustomerResponse;
-import rw.utility.billing.entity.Customer;
-import rw.utility.billing.enums.Status;
-import rw.utility.billing.exception.DuplicateResourceException;
-import rw.utility.billing.exception.ResourceNotFoundException;
-import rw.utility.billing.repository.CustomerRepository;
-import rw.utility.billing.repository.UserRepository;
+import com.chrispin.utility_billing_system.dto.request.CustomerRequest;
+import com.chrispin.utility_billing_system.dto.response.CustomerResponse;
+import com.chrispin.utility_billing_system.entity.Customer;
+import com.chrispin.utility_billing_system.enums.Status;
+import com.chrispin.utility_billing_system.exception.DuplicateResourceException;
+import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
+import com.chrispin.utility_billing_system.repository.CustomerRepository;
+import com.chrispin.utility_billing_system.repository.UserRepository;
 
 import java.util.List;
 

@@ -1,8 +1,9 @@
-package rw.utility.billing.entity;
+package com.chrispin.utility_billing_system.entity;
 
+import com.chrispin.utility_billing_system.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
-import rw.utility.billing.enums.Status;
+
 
 @Entity
 @Table(name = "customers",
