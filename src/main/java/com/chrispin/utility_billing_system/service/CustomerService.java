@@ -2,6 +2,7 @@ package com.chrispin.utility_billing_system.service;
 
 import com.chrispin.utility_billing_system.dto.request.UpdateUserRequest;
 import com.chrispin.utility_billing_system.dto.request.UserRequest;
+import com.chrispin.utility_billing_system.dto.response.MessageResponse;
 import com.chrispin.utility_billing_system.dto.response.UserResponse;
 import com.chrispin.utility_billing_system.entity.Role;
 import com.chrispin.utility_billing_system.entity.User;
@@ -27,10 +28,11 @@ public class CustomerService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final AuthService authService;
     private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserResponse create(UserRequest request) {
+    public MessageResponse create(UserRequest request) {
         // Business rule: prevent duplicate customer registration (unique National ID).
         if (userRepository.existsByNationalId(request.nationalId())) {
             throw new DuplicateResourceException(
@@ -40,8 +42,6 @@ public class CustomerService {
         // provide role (customer)
         Set<Role> roles = new HashSet<>();
         roles.add(getRole(ERole.ROLE_CUSTOMER));
-
-
 
         User customer = User.builder()
                 .fullNames(request.fullNames())
@@ -55,7 +55,10 @@ public class CustomerService {
                 .roles(roles)
                 .build();
 
-        return UserResponse.from(userRepository.save(customer));
+        userRepository.save(customer);
+        authService.sendVerificationCode(customer);
+        return new MessageResponse("Registration successful. A verification code has been emailed to "
+                + customer.getEmail() + ". Verification required at /api/auth/verify before logging in.");
     }
 
     @Transactional(readOnly = true)

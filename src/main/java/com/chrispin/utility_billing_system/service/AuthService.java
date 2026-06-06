@@ -63,7 +63,7 @@ public class AuthService {
 
         sendVerificationCode(user);
         return new MessageResponse("Registration successful. A verification code has been emailed to "
-                + user.getEmail() + ". Verify it at /api/auth/verify before logging in.");
+                + user.getEmail() + ". Verification required at /api/auth/verify before logging in.");
     }
 
     public JwtResponse login(LoginRequest request) {
@@ -113,7 +113,7 @@ public class AuthService {
         return new MessageResponse("A new verification code has been emailed to " + user.getEmail());
     }
 
-    private void sendVerificationCode(User user) {
+    public void sendVerificationCode(User user) {
         String code = otpService.issue(user.getEmail(), OtpPurpose.ACCOUNT_VERIFICATION);
         emailService.send(user.getEmail(), "Verify your Utility Billing account",
                 "Dear " + user.getFullNames() + ",\n\n"

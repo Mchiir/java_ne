@@ -2,6 +2,7 @@ package com.chrispin.utility_billing_system.controller;
 
 import com.chrispin.utility_billing_system.dto.request.UpdateUserRequest;
 import com.chrispin.utility_billing_system.dto.request.UserRequest;
+import com.chrispin.utility_billing_system.dto.response.MessageResponse;
 import com.chrispin.utility_billing_system.dto.response.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +29,7 @@ public class CustomerController {
     @PostMapping
     @Operation(summary = "Register a new customer")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR')")
-    public ResponseEntity<UserResponse> create(@Valid @RequestBody UserRequest request) {
+    public ResponseEntity<MessageResponse> create(@Valid @RequestBody UserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(request));
     }
 
