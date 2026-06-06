@@ -3,8 +3,6 @@ package com.chrispin.utility_billing_system.entity;
 import com.chrispin.utility_billing_system.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
@@ -41,12 +39,4 @@ public class Payment {
     /** External transaction reference (mobile money / bank ref). */
     @Column
     private String reference;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }
