@@ -40,18 +40,19 @@ public class AuthService {
     private final PasswordService passwordService;
 
     @Transactional
-    public MessageResponse signup(SignupRequest request) {
+    public MessageResponse signup(UserRequest request) {
         if (userRepository.existsByEmail(request.email())) {
             throw new DuplicateResourceException("Email is already in use: " + request.email());
         }
 
-        // provide role
+        // provide role (customer)
         Set<Role> roles = new HashSet<>();
         roles.add(getRole(ERole.ROLE_CUSTOMER));
 
         User user = User.builder()
                 .fullNames(request.fullNames())
                 .email(request.email())
+                .address(request.address())
                 .phoneNumber(request.phoneNumber())
                 .password(passwordEncoder.encode(request.password()))
                 .status(Status.ACTIVE)
@@ -61,7 +62,7 @@ public class AuthService {
         userRepository.save(user);
 
         sendVerificationCode(user);
-        return new MessageResponse("User registered. A verification code has been emailed to "
+        return new MessageResponse("Registration successful. A verification code has been emailed to "
                 + user.getEmail() + ". Verify it at /api/auth/verify before logging in.");
     }
 
@@ -158,15 +159,7 @@ public class AuthService {
         UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
         User user = userRepository.findByEmail(principal.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "email", principal.getUsername()));
-        return new UserResponse(
-                user.getId(),
-                user.getFullNames(),
-                user.getEmail(),
-                user.getPhoneNumber(),
-                user.getStatus(),
-                user.getRoles().stream()
-                        .map(r -> r.getName().name())
-                        .toList()
-        );
+
+        return UserResponse.from(user);
     }
 }

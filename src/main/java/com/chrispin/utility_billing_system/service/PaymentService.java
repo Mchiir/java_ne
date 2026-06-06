@@ -17,6 +17,7 @@ import com.chrispin.utility_billing_system.util.NotificationMessages;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -80,14 +81,14 @@ public class PaymentService {
     }
 
     @Transactional(readOnly = true)
-    public List<PaymentResponse> findByBill(Long billId) {
+    public List<PaymentResponse> findByBill(UUID billId) {
         return paymentRepository.findByBill_Id(billId).stream().map(PaymentResponse::from).toList();
     }
 
     /** Payment history for the authenticated customer account. */
     @Transactional(readOnly = true)
     public List<PaymentResponse> findMine(String email) {
-        return paymentRepository.findByBill_Customer_User_Email(email).stream()
+        return paymentRepository.findByBill_Customer_Email(email).stream()
                 .map(PaymentResponse::from).toList();
     }
 }

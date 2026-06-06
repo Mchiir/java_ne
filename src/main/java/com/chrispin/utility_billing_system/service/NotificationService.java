@@ -7,6 +7,7 @@ import com.chrispin.utility_billing_system.dto.response.NotificationResponse;
 import com.chrispin.utility_billing_system.repository.NotificationRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class NotificationService {
     }
 
     @Transactional(readOnly = true)
-    public List<NotificationResponse> findByCustomer(Long customerId) {
+    public List<NotificationResponse> findByCustomer(UUID customerId) {
         return notificationRepository.findByCustomer_IdOrderByCreatedAtDesc(customerId).stream()
                 .map(NotificationResponse::from).toList();
     }
@@ -29,7 +30,7 @@ public class NotificationService {
     /** Notifications for the authenticated customer account. */
     @Transactional(readOnly = true)
     public List<NotificationResponse> findMine(String email) {
-        return notificationRepository.findByCustomer_User_EmailOrderByCreatedAtDesc(email).stream()
+        return notificationRepository.findByCustomer_EmailOrderByCreatedAtDesc(email).stream()
                 .map(NotificationResponse::from).toList();
     }
 }

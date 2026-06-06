@@ -16,7 +16,7 @@ import com.chrispin.utility_billing_system.dto.request.OtpRequest;
 import com.chrispin.utility_billing_system.dto.request.OtpVerifyRequest;
 import com.chrispin.utility_billing_system.dto.request.ResendCodeRequest;
 import com.chrispin.utility_billing_system.dto.request.ResetPasswordRequest;
-import com.chrispin.utility_billing_system.dto.request.SignupRequest;
+import com.chrispin.utility_billing_system.dto.request.UserRequest;
 import com.chrispin.utility_billing_system.dto.response.JwtResponse;
 import com.chrispin.utility_billing_system.dto.response.MessageResponse;
 import com.chrispin.utility_billing_system.service.AuthService;
@@ -28,18 +28,14 @@ import com.chrispin.utility_billing_system.service.PasswordService;
 @Tag(name = "Auth", description = "User registration, login and password management")
 public class AuthController {
 
-    private static final String SIGNUP = "Auth 1 - Sign-up & Verification";
-    private static final String LOGIN = "Auth 2 - Login";
-    private static final String PASSWORD = "Auth 3 - Password";
-
     private final AuthService authService;
     private final PasswordService passwordService;
 
     // ----- Sign-up & Verification -----
 
     @PostMapping("/signup")
-    @Operation(summary = "Register a new user (emails a verification code)")
-    public ResponseEntity<MessageResponse> signup(@Valid @RequestBody SignupRequest request) {
+    @Operation(summary = "Signup for Customers (emails a verification code)")
+    public ResponseEntity<MessageResponse> signup(@Valid @RequestBody UserRequest request) {
         return ResponseEntity.ok(authService.signup(request));
     }
 

@@ -15,6 +15,7 @@ import com.chrispin.utility_billing_system.repository.MeterRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -77,12 +78,12 @@ public class MeterReadingService {
     }
 
     @Transactional(readOnly = true)
-    public List<MeterReadingResponse> findByMeter(Long meterId) {
+    public List<MeterReadingResponse> findByMeter(UUID meterId) {
         return readingRepository.findByMeter_Id(meterId).stream().map(MeterReadingResponse::from).toList();
     }
 
     @Transactional(readOnly = true)
-    public MeterReadingResponse findById(Long id) {
+    public MeterReadingResponse findById(UUID id) {
         return MeterReadingResponse.from(readingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("MeterReading", "id", id)));
     }

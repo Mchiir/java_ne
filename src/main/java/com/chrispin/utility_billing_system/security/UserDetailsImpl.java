@@ -9,18 +9,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
 public class UserDetailsImpl implements UserDetails {
 
-    private final Long id;
+    private final UUID id;
     private final String email;
     private final String password;
     private final boolean active;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String email, String password, boolean active,
+    public UserDetailsImpl(UUID id, String email, String password, boolean active,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;

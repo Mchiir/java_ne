@@ -3,6 +3,7 @@ package com.chrispin.utility_billing_system.dto.request;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * Generate a bill from a captured meter reading. The billing cycle (month/year),
@@ -10,7 +11,7 @@ import java.time.LocalDate;
  * version effective for that cycle.
  */
 public record BillGenerateRequest(
-        @NotNull Long meterReadingId,
+        @NotNull UUID meterReadingId,
         /** Optional payment due date; defaults to generation date + 15 days. */
         LocalDate dueDate
 ) {}

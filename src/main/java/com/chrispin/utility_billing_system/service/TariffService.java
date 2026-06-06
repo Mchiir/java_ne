@@ -12,6 +12,7 @@ import com.chrispin.utility_billing_system.repository.TariffRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +54,7 @@ public class TariffService {
     }
 
     @Transactional(readOnly = true)
-    public TariffResponse findById(Long id) {
+    public TariffResponse findById(UUID id) {
         return TariffResponse.from(getTariff(id));
     }
 
@@ -67,13 +68,13 @@ public class TariffService {
     }
 
     @Transactional
-    public TariffResponse setActive(Long id, boolean active) {
+    public TariffResponse setActive(UUID id, boolean active) {
         Tariff tariff = getTariff(id);
         tariff.setActive(active);
         return TariffResponse.from(tariffRepository.save(tariff));
     }
 
-    private Tariff getTariff(Long id) {
+    private Tariff getTariff(UUID id) {
         return tariffRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tariff", "id", id));
     }

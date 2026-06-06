@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8888
-@authToken = your_jwt_token_here
+@authToken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwicm9sZXMiOiJST0xFX0NVU1RPTUVSIiwidWlkIjo0LCJpYXQiOjE3ODA3NjIxNzEsImV4cCI6MTc4MDc2NTc3MX0.-z2GvIVj-UROtMGpeM14QKTAaK1RtwO253otsrUjA-816AzCEi7JMKtMdp5oQCzX1C9gCVybWaWP5Cyiu0z9DA
 
 ### Register a new user (emails a verification code)
 POST {{baseUrl}}/api/auth/signup
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
   "email": "johndoe@example.com",
-  "code": "123456"
+  "code": "969126"
 }
 
 ### Resend the email-verification code
@@ -34,8 +34,8 @@ POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "",
-  "password": "SecurePassword123"
+  "email": "johndoe@example.com",
+  "password": "NewSecurePassword123"
 }
 
 ### Request a fresh code for any flow
@@ -44,7 +44,7 @@ Content-Type: application/json
 
 {
   "email": "johndoe@example.com",
-  "purpose": "ACCOUNT_VERIFICATION" 
+  "purpose": "PASSWORD_RESET"
 }
 
 ### Request a password-reset code by email
@@ -61,7 +61,7 @@ Content-Type: application/json
 
 {
   "email": "johndoe@example.com",
-  "code": "654321",
+  "code": "891903",
   "newPassword": "NewSecurePassword123"
 }
 
@@ -71,8 +71,8 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "currentPassword": "SecurePassword123",
-  "newPassword": "NewSecurePassword123"
+  "currentPassword": "NewSecurePassword123",
+  "newPassword": "SecurePassword123"
 }
 
 ### Get my profile info

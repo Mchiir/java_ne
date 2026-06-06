@@ -13,6 +13,7 @@ import com.chrispin.utility_billing_system.dto.response.MeterReadingResponse;
 import com.chrispin.utility_billing_system.service.MeterReadingService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/readings")
@@ -39,14 +40,14 @@ public class MeterReadingController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a reading by id")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR','FINANCE')")
-    public MeterReadingResponse findById(@PathVariable Long id) {
+    public MeterReadingResponse findById(@PathVariable UUID id) {
         return readingService.findById(id);
     }
 
     @GetMapping("/meter/{meterId}")
     @Operation(summary = "List readings for a meter")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR','FINANCE')")
-    public List<MeterReadingResponse> findByMeter(@PathVariable Long meterId) {
+    public List<MeterReadingResponse> findByMeter(@PathVariable UUID meterId) {
         return readingService.findByMeter(meterId);
     }
 }

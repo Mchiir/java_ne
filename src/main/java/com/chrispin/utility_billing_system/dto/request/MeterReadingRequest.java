@@ -5,9 +5,10 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record MeterReadingRequest(
-        @NotNull Long meterId,
+        @NotNull UUID meterId,
         /** Optional: if omitted, defaults to the meter's last current reading (or 0). */
         @PositiveOrZero BigDecimal previousReading,
         @NotNull @PositiveOrZero BigDecimal currentReading,

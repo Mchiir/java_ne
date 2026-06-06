@@ -5,13 +5,14 @@ import com.chrispin.utility_billing_system.enums.BillStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record BillResponse(
-        Long id,
+        UUID id,
         String billReference,
-        Long customerId,
+        UUID customerId,
         String customerNames,
-        Long meterId,
+        UUID meterId,
         String meterNumber,
         Integer billingMonth,
         Integer billingYear,

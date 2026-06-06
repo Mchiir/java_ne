@@ -7,9 +7,10 @@ import com.chrispin.utility_billing_system.enums.MeterType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record TariffResponse(
-        Long id,
+        UUID id,
         Integer version,
         MeterType meterType,
         BigDecimal consumptionRate,

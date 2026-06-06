@@ -4,22 +4,23 @@ import com.chrispin.utility_billing_system.enums.MeterType;
 import com.chrispin.utility_billing_system.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
-@Table(name = "meters",
-        uniqueConstraints = @UniqueConstraint(columnNames = "meter_number"))
+@Table(name = "meters")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Meter {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
+    private UUID id;
 
     @Column(name = "meter_number", nullable = false, unique = true)
     private String meterNumber;
@@ -38,5 +39,5 @@ public class Meter {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    private User customer;
 }

@@ -7,9 +7,10 @@ import com.chrispin.utility_billing_system.enums.PaymentMethod;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record PaymentResponse(
-        Long id,
+        UUID id,
         String billReference,
         BigDecimal amountPaid,
         PaymentMethod paymentMethod,

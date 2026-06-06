@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +48,7 @@ public class BillService {
         }
 
         Meter meter = reading.getMeter();
-        Customer customer = meter.getCustomer();
+        User customer = meter.getCustomer();
 
         // Business rule: inactive customers cannot receive bills.
         if (customer.getStatus() != Status.ACTIVE) {
@@ -103,7 +104,7 @@ public class BillService {
 
     /** Approval by ADMIN/FINANCE. Only a PENDING bill can be approved. */
     @Transactional
-    public BillResponse approve(Long id, String approverEmail) {
+    public BillResponse approve(UUID id, String approverEmail) {
         Bill bill = getBill(id);
         if (bill.getStatus() != BillStatus.PENDING) {
             throw new BadRequestException("Only PENDING bills can be approved; current status: "
@@ -122,22 +123,22 @@ public class BillService {
     }
 
     @Transactional(readOnly = true)
-    public BillResponse findById(Long id) {
+    public BillResponse findById(UUID id) {
         return BillResponse.from(getBill(id));
     }
 
     @Transactional(readOnly = true)
-    public List<BillResponse> findByCustomer(Long customerId) {
+    public List<BillResponse> findByCustomer(UUID customerId) {
         return billRepository.findByCustomer_Id(customerId).stream().map(BillResponse::from).toList();
     }
 
     /** Bills belonging to the authenticated customer account. */
     @Transactional(readOnly = true)
     public List<BillResponse> findMine(String email) {
-        return billRepository.findByCustomer_User_Email(email).stream().map(BillResponse::from).toList();
+        return billRepository.findByCustomer_Email(email).stream().map(BillResponse::from).toList();
     }
 
-    private Bill getBill(Long id) {
+    private Bill getBill(UUID id) {
         return billRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bill", "id", id));
     }

@@ -14,6 +14,7 @@ import com.chrispin.utility_billing_system.dto.response.PaymentResponse;
 import com.chrispin.utility_billing_system.service.PaymentService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -40,7 +41,7 @@ public class PaymentController {
     @GetMapping("/bill/{billId}")
     @Operation(summary = "List payments for a bill")
     @PreAuthorize("hasAnyRole('FINANCE','ADMIN')")
-    public List<PaymentResponse> findByBill(@PathVariable Long billId) {
+    public List<PaymentResponse> findByBill(@PathVariable UUID billId) {
         return paymentService.findByBill(billId);
     }
 

@@ -7,14 +7,15 @@ import com.chrispin.utility_billing_system.enums.MeterType;
 import com.chrispin.utility_billing_system.enums.Status;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record MeterResponse(
-        Long id,
+        UUID id,
         String meterNumber,
         MeterType meterType,
         LocalDate installationDate,
         Status status,
-        Long customerId,
+        UUID customerId,
         String customerNames
 ) {
     public static MeterResponse from(Meter m) {

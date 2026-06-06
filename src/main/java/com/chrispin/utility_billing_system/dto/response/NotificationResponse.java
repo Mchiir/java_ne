@@ -4,12 +4,13 @@ import com.chrispin.utility_billing_system.entity.Notification;
 import com.chrispin.utility_billing_system.enums.NotificationStatus;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public record NotificationResponse(
-        Long id,
-        Long customerId,
+        UUID id,
+        UUID customerId,
         String customerNames,
-        Long billId,
+        UUID billId,
         String message,
         String type,
         NotificationStatus status,

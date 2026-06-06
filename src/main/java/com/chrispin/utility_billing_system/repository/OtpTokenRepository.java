@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface OtpTokenRepository extends JpaRepository<OtpToken, Long> {
+public interface OtpTokenRepository extends JpaRepository<OtpToken, UUID> {
 
     Optional<OtpToken> findTopByEmailAndCodeAndPurposeAndUsedFalseOrderByExpiresAtDesc(
             String email, String code, OtpPurpose purpose);

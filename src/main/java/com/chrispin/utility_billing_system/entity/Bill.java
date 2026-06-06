@@ -3,30 +3,31 @@ package com.chrispin.utility_billing_system.entity;
 import com.chrispin.utility_billing_system.enums.BillStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
-@Table(name = "bills",
-        uniqueConstraints = @UniqueConstraint(columnNames = "bill_reference"))
+@Table(name = "bills")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Bill {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
+    private UUID id;
 
     @Column(name = "bill_reference", nullable = false, unique = true)
     private String billReference;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    private User customer;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "meter_id", nullable = false)

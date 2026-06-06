@@ -5,10 +5,11 @@ import com.chrispin.utility_billing_system.entity.MeterReading;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record MeterReadingResponse(
-        Long id,
-        Long meterId,
+        UUID id,
+        UUID meterId,
         String meterNumber,
         BigDecimal previousReading,
         BigDecimal currentReading,

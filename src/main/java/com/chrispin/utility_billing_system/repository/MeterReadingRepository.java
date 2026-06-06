@@ -5,15 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface MeterReadingRepository extends JpaRepository<MeterReading, Long> {
+public interface MeterReadingRepository extends JpaRepository<MeterReading, UUID> {
 
-    boolean existsByMeter_IdAndReadingMonthAndReadingYear(Long meterId, Integer month, Integer year);
+    boolean existsByMeter_IdAndReadingMonthAndReadingYear(UUID meterId, Integer month, Integer year);
 
-    Optional<MeterReading> findByMeter_IdAndReadingMonthAndReadingYear(Long meterId, Integer month, Integer year);
+    Optional<MeterReading> findByMeter_IdAndReadingMonthAndReadingYear(UUID meterId, Integer month, Integer year);
 
     /** Most recent reading for a meter (used to default the previous reading). */
-    Optional<MeterReading> findTopByMeter_IdOrderByReadingYearDescReadingMonthDesc(Long meterId);
+    Optional<MeterReading> findTopByMeter_IdOrderByReadingYearDescReadingMonthDesc(UUID meterId);
 
-    List<MeterReading> findByMeter_Id(Long meterId);
+    List<MeterReading> findByMeter_Id(UUID meterId);
 }

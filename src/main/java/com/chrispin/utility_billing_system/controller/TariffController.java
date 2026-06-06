@@ -14,6 +14,7 @@ import com.chrispin.utility_billing_system.enums.MeterType;
 import com.chrispin.utility_billing_system.service.TariffService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/tariffs")
@@ -47,14 +48,14 @@ public class TariffController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a tariff by id")
     @PreAuthorize("hasAnyRole('ADMIN','FINANCE')")
-    public TariffResponse findById(@PathVariable Long id) {
+    public TariffResponse findById(@PathVariable UUID id) {
         return tariffService.findById(id);
     }
 
     @PatchMapping("/{id}/active")
     @Operation(summary = "Enable / disable a tariff version")
     @PreAuthorize("hasRole('ADMIN')")
-    public TariffResponse setActive(@PathVariable Long id, @RequestParam boolean active) {
+    public TariffResponse setActive(@PathVariable UUID id, @RequestParam boolean active) {
         return tariffService.setActive(id, active);
     }
 }

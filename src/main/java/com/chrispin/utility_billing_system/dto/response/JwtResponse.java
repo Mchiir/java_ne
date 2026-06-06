@@ -1,16 +1,17 @@
 package com.chrispin.utility_billing_system.dto.response;
 
 import java.util.List;
+import java.util.UUID;
 
 public record JwtResponse(
         String token,
         String type,
-        Long id,
+        UUID id,
         String email,
         String fullNames,
         List<String> roles
 ) {
-    public JwtResponse(String token, Long id, String email, String fullNames, List<String> roles) {
+    public JwtResponse(String token, UUID id, String email, String fullNames, List<String> roles) {
         this(token, "Bearer", id, email, fullNames, roles);
     }
 }

@@ -10,6 +10,7 @@ import com.chrispin.utility_billing_system.enums.Status;
 import com.chrispin.utility_billing_system.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -28,13 +29,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a user by id")
-    public UserResponse findById(@PathVariable Long id) {
+    public UserResponse findById(@PathVariable UUID id) {
         return userService.findById(id);
     }
 
     @PatchMapping("/{id}/status")
     @Operation(summary = "Activate / deactivate a user")
-    public UserResponse updateStatus(@PathVariable Long id, @RequestParam Status status) {
+    public UserResponse updateStatus(@PathVariable UUID id, @RequestParam Status status) {
         return userService.updateStatus(id, status);
     }
 }

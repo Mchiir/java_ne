@@ -13,7 +13,8 @@ import com.chrispin.utility_billing_system.dto.request.BillGenerateRequest;
 import com.chrispin.utility_billing_system.dto.response.BillResponse;
 import com.chrispin.utility_billing_system.service.BillService;
 
-import java.util.List;  
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/bills")
@@ -33,7 +34,7 @@ public class BillController {
     @PatchMapping("/{id}/approve")
     @Operation(summary = "Approve a bill (ROLE_ADMIN / ROLE_FINANCE)")
     @PreAuthorize("hasAnyRole('ADMIN','FINANCE')")
-    public BillResponse approve(@PathVariable Long id, Authentication authentication) {
+    public BillResponse approve(@PathVariable UUID id, Authentication authentication) {
         return billService.approve(id, authentication.getName());
     }
 
@@ -47,14 +48,14 @@ public class BillController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a bill by id")
     @PreAuthorize("hasAnyRole('ADMIN','FINANCE','OPERATOR')")
-    public BillResponse findById(@PathVariable Long id) {
+    public BillResponse findById(@PathVariable UUID id) {
         return billService.findById(id);
     }
 
     @GetMapping("/customer/{customerId}")
     @Operation(summary = "List bills for a customer")
     @PreAuthorize("hasAnyRole('ADMIN','FINANCE','OPERATOR')")
-    public List<BillResponse> findByCustomer(@PathVariable Long customerId) {
+    public List<BillResponse> findByCustomer(@PathVariable UUID customerId) {
         return billService.findByCustomer(customerId);
     }
 

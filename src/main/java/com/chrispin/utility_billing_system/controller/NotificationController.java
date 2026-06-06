@@ -10,6 +10,7 @@ import com.chrispin.utility_billing_system.dto.response.NotificationResponse;
 import com.chrispin.utility_billing_system.service.NotificationService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/notifications")
@@ -29,7 +30,7 @@ public class NotificationController {
     @GetMapping("/customer/{customerId}")
     @Operation(summary = "List notifications for a customer")
     @PreAuthorize("hasAnyRole('ADMIN','FINANCE','OPERATOR')")
-    public List<NotificationResponse> findByCustomer(@PathVariable Long customerId) {
+    public List<NotificationResponse> findByCustomer(@PathVariable UUID customerId) {
         return notificationService.findByCustomer(customerId);
     }
 

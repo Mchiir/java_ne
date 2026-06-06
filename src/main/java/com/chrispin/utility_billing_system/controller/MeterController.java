@@ -14,6 +14,7 @@ import com.chrispin.utility_billing_system.enums.Status;
 import com.chrispin.utility_billing_system.service.MeterService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/meters")
@@ -40,21 +41,21 @@ public class MeterController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a meter by id")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR','FINANCE')")
-    public MeterResponse findById(@PathVariable Long id) {
+    public MeterResponse findById(@PathVariable UUID id) {
         return meterService.findById(id);
     }
 
     @GetMapping("/customer/{customerId}")
     @Operation(summary = "List meters belonging to a customer")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR','FINANCE')")
-    public List<MeterResponse> findByCustomer(@PathVariable Long customerId) {
+    public List<MeterResponse> findByCustomer(@PathVariable UUID customerId) {
         return meterService.findByCustomer(customerId);
     }
 
     @PatchMapping("/{id}/status")
     @Operation(summary = "Activate / deactivate a meter")
     @PreAuthorize("hasAnyRole('ADMIN','OPERATOR')")
-    public MeterResponse updateStatus(@PathVariable Long id, @RequestParam Status status) {
+    public MeterResponse updateStatus(@PathVariable UUID id, @RequestParam Status status) {
         return meterService.updateStatus(id, status);
     }
 }

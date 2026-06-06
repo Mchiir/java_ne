@@ -3,8 +3,11 @@ package com.chrispin.utility_billing_system.entity;
 import com.chrispin.utility_billing_system.enums.OtpPurpose;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "otp_tokens",
@@ -15,10 +18,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class OtpToken {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
+    private UUID id;
 
     @Column(nullable = false)
     private String email;
@@ -38,11 +41,11 @@ public class OtpToken {
     @Builder.Default
     private boolean used = false;
 
-    @Column(name = "created_at", nullable = false)
-    @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
-
     public boolean isExpired() {
         return LocalDateTime.now().isAfter(expiresAt);
     }
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 }

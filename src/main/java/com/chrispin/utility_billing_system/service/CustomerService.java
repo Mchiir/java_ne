@@ -1,65 +1,82 @@
 package com.chrispin.utility_billing_system.service;
 
+import com.chrispin.utility_billing_system.dto.request.UpdateUserRequest;
+import com.chrispin.utility_billing_system.dto.request.UserRequest;
+import com.chrispin.utility_billing_system.dto.response.UserResponse;
+import com.chrispin.utility_billing_system.entity.Role;
+import com.chrispin.utility_billing_system.entity.User;
+import com.chrispin.utility_billing_system.enums.ERole;
+import com.chrispin.utility_billing_system.exception.BadRequestException;
+import com.chrispin.utility_billing_system.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.chrispin.utility_billing_system.dto.request.CustomerRequest;
-import com.chrispin.utility_billing_system.dto.response.CustomerResponse;
-import com.chrispin.utility_billing_system.entity.Customer;
 import com.chrispin.utility_billing_system.enums.Status;
 import com.chrispin.utility_billing_system.exception.DuplicateResourceException;
 import com.chrispin.utility_billing_system.exception.ResourceNotFoundException;
-import com.chrispin.utility_billing_system.repository.CustomerRepository;
 import com.chrispin.utility_billing_system.repository.UserRepository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     @Transactional
-    public CustomerResponse create(CustomerRequest request) {
+    public UserResponse create(UserRequest request) {
         // Business rule: prevent duplicate customer registration (unique National ID).
-        if (customerRepository.existsByNationalId(request.nationalId())) {
+        if (userRepository.existsByNationalId(request.nationalId())) {
             throw new DuplicateResourceException(
                     "Customer already exists with National ID: " + request.nationalId());
         }
-        Customer customer = Customer.builder()
+
+        // provide role (customer)
+        Set<Role> roles = new HashSet<>();
+        roles.add(getRole(ERole.ROLE_CUSTOMER));
+
+
+
+        User customer = User.builder()
                 .fullNames(request.fullNames())
-                .nationalId(request.nationalId())
                 .email(request.email())
-                .phoneNumber(request.phoneNumber())
+                .password(passwordEncoder.encode(request.password()))
                 .address(request.address())
+                .nationalId(request.nationalId())
+                .phoneNumber(request.phoneNumber())
                 .status(Status.ACTIVE)
+                .emailVerified(false)
+                .roles(roles)
                 .build();
-        // Link to an existing login account when the emails match, enabling the
-        // customer self-service (/me) endpoints.
-        if (request.email() != null) {
-            userRepository.findByEmail(request.email()).ifPresent(customer::setUser);
-        }
-        return CustomerResponse.from(customerRepository.save(customer));
+
+        return UserResponse.from(userRepository.save(customer));
     }
 
     @Transactional(readOnly = true)
-    public List<CustomerResponse> findAll() {
-        return customerRepository.findAll().stream().map(CustomerResponse::from).toList();
+    public List<UserResponse> findAll() {
+        return userRepository.findByRole(ERole.ROLE_CUSTOMER)
+                .stream().
+                map(UserResponse::from).
+                toList();
     }
 
     @Transactional(readOnly = true)
-    public CustomerResponse findById(Long id) {
-        return CustomerResponse.from(getCustomer(id));
+    public UserResponse findById(UUID id) {
+        return UserResponse.from(getCustomer(id));
     }
 
     @Transactional
-    public CustomerResponse update(Long id, CustomerRequest request) {
-        Customer customer = getCustomer(id);
+    public UserResponse update(UUID id, UpdateUserRequest request) {
+        User customer = getCustomer(id);
         // If changing National ID, keep it unique.
         if (!customer.getNationalId().equals(request.nationalId())
-                && customerRepository.existsByNationalId(request.nationalId())) {
+                && userRepository.existsByNationalId(request.nationalId())) {
             throw new DuplicateResourceException(
                     "Customer already exists with National ID: " + request.nationalId());
         }
@@ -68,18 +85,23 @@ public class CustomerService {
         customer.setEmail(request.email());
         customer.setPhoneNumber(request.phoneNumber());
         customer.setAddress(request.address());
-        return CustomerResponse.from(customerRepository.save(customer));
+        return UserResponse.from(userRepository.save(customer));
     }
 
     @Transactional
-    public CustomerResponse updateStatus(Long id, Status status) {
-        Customer customer = getCustomer(id);
+    public UserResponse updateStatus(UUID id, Status status) {
+        User customer = getCustomer(id);
         customer.setStatus(status);
-        return CustomerResponse.from(customerRepository.save(customer));
+        return UserResponse.from(userRepository.save(customer));
     }
 
-    private Customer getCustomer(Long id) {
-        return customerRepository.findById(id)
+    private User getCustomer(UUID id) {
+        return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
+    }
+
+    private Role getRole(ERole name) {
+        return roleRepository.findByName(name)
+                .orElseThrow(() -> new BadRequestException("Role not configured: " + name));
     }
 }
