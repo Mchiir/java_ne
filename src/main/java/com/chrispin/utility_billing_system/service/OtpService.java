@@ -63,6 +63,7 @@ public class OtpService {
         return expiryMinutes;
     }
 
+    // generate a 6 digit code
     private String generateCode() {
         StringBuilder sb = new StringBuilder(otpLength);
         for (int i = 0; i < otpLength; i++) {

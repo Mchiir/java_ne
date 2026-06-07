@@ -7,9 +7,18 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
+/**
+ * Posting a Payment (e.g., via MoMo / Bank API)
+ */
 public record PaymentRequest(
-        @NotBlank String billReference,
-        @NotNull @Positive BigDecimal amountPaid,
+        @NotBlank(message = "Bill reference is required.")
+        String billReference,
+
+        @NotNull(message = "Amount paid is required.")
+        @Positive(message = "Amount paid must be greater than zero.")
+        BigDecimal amountPaid,
+
         @NotNull PaymentMethod paymentMethod,
+        @NotBlank(message = "External transaction reference is required.")
         String reference
 ) {}

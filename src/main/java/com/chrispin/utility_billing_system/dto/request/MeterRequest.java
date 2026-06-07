@@ -7,8 +7,13 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Meter Provisioning
+ */
 public record MeterRequest(
-        @NotBlank String meterNumber,
+        @NotBlank(message = "Meter number is required.")
+        String meterNumber,
+
         @NotNull MeterType meterType,
         LocalDate installationDate,
         @NotNull UUID customerId

@@ -1,27 +1,30 @@
 @baseUrl = http://localhost:8888
-@authToken = your_jwt_token_here
-@billId = 1
+@adminToken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB1dGlsaXR5YmlsbGluZy5jb20iLCJyb2xlcyI6IlJPTEVfQURNSU4iLCJ1aWQiOiI4Yjc5NmZhOC1hZTI0LTQ4ZTgtODYyZi01YjFiNGYyM2YzNjIiLCJpYXQiOjE3ODA4MjI4MjAsImV4cCI6MTc4MDgyNjQyMH0.D_oBi8QhInUEoYemDQPzoFiM8Wg_1OGMzjDBR5lZk6x7HnsMEYp885S4-G0hohJELICXIxYj5chdP-K_cQKa6Q
+@financeToken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmaW5hbmNlQHV0aWxpdHliaWxsaW5nLmNvbSIsInJvbGVzIjoiUk9MRV9GSU5BTkNFIiwidWlkIjoiYmU3OWMxOTctNDNjOC00ZDM4LTljOTgtMzI0MjFhOWYzMzljIiwiaWF0IjoxNzgwODIyODQ4LCJleHAiOjE3ODA4MjY0NDh9.xv8jQNrJzOKsUNDlPzTyXgJw6-YFGY7-o-Or0iVWQfPnzLAemp82WXWWm_qU-Lc1f92rzKyQjrjLqplld2rGtg
+@operatorToken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcGVyYXRvckB1dGlsaXR5YmlsbGluZy5jb20iLCJyb2xlcyI6IlJPTEVfT1BFUkFUT1IiLCJ1aWQiOiIwZmM2MDkzMy01NDQyLTRmYzMtODU3ZS01Yjg0OTBkMjFiMDMiLCJpYXQiOjE3ODA4MjI4OTMsImV4cCI6MTc4MDgyNjQ5M30.d7DRCwkQ1vWQZ-ZT3WQKli7N6F_R2tiOmpWT54ryXU_T39ndlozLbSl8NGNwy82cujgCydGQO4WLBSyKmh9niw
+@customerToken = eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwicm9sZXMiOiJST0xFX0NVU1RPTUVSIiwidWlkIjoiYzJmMzg1Y2QtZDJhNS00NGNjLTk0ZTQtNGU5MmU5MzQ1YTAxIiwiaWF0IjoxNzgwODIzMjM1LCJleHAiOjE3ODA4MjY4MzV9.dJ4EJ29CmuvISAJfgtEg0l-5D7xOf2ZdfVEZEtiGtthDcfq-jhnihKOaZUVtP1bi8gAPinQaTrfrInY_HjOKLQ
+@billId = 2372ebd0-b39f-4335-8714-36bf82f42508
 
 ### List all payments
 GET {{baseUrl}}/api/payments
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{adminToken}}
 
 ### Record a payment against a bill (ROLE_FINANCE)
 POST {{baseUrl}}/api/payments
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{financeToken}}
 Content-Type: application/json
 
 {
-  "billReference": "BILL-2026-001",
-  "amountPaid": 15450.00,
+  "billReference": "BILL-202606-WTR-2026-9960",
+  "amountPaid": 932.25,
   "paymentMethod": "MOBILE_MONEY",
   "reference": "TXN-MOMO-99482"
 }
 
 ### View my own payment history (ROLE_CUSTOMER)
 GET {{baseUrl}}/api/payments/me
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{customerToken}}
 
 ### List payments for a bill
 GET {{baseUrl}}/api/payments/bill/{{billId}}
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{financeToken}}
