@@ -1,0 +1,8 @@
+flowchart TD
+    Request[HTTP Request] --> Filter[JWT Auth Filter]
+    Filter --> Valid{Token Valid?}
+
+    Valid -- Yes --> Controller
+    Valid -- No --> AuthEntryPoint[401 Error]
+
+    Controller --> Service --> DB

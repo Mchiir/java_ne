@@ -1,0 +1,155 @@
+//      TABLE DEFINITIONS
+//      you can paste this markup in dbdiagram.io/d for visualization
+
+Table users {
+  id uuid [pk]
+  full_names varchar [not null]
+  email varchar [unique, not null]
+  address varchar
+  phone_number varchar [unique]
+  national_id varchar [unique]
+  password varchar [not null]
+  status varchar(20) [not null, default: 'ACTIVE']
+  email_verified boolean [not null, default: false]
+  created_at timestamp [not null]
+  updated_at timestamp
+}
+
+Table roles {
+  id uuid [pk]
+  name varchar(30) [unique, not null]
+}
+
+Table user_roles {
+  user_id uuid [not null]
+  role_id uuid [not null]
+
+  Indexes {
+    (user_id, role_id) [pk]
+  }
+}
+
+Table meters {
+  id uuid [pk]
+  meter_number varchar [unique, not null]
+  meter_type varchar(20) [not null]
+  installation_date date
+  status varchar(20) [not null, default: 'ACTIVE']
+  customer_id uuid [not null]
+}
+
+Table meter_readings {
+  id uuid [pk]
+  meter_id uuid [not null]
+  previous_reading decimal(18,2) [not null]
+  current_reading decimal(18,2) [not null]
+  consumption decimal(18,2) [not null]
+  reading_date date [not null]
+  reading_month integer [not null]
+  reading_year integer [not null]
+
+  Indexes {
+    (meter_id, reading_month, reading_year) [unique, name: 'uq_reading_meter_month_year']
+  }
+}
+
+Table tariffs {
+  id uuid [pk]
+  version integer [not null]
+  meter_type varchar(20) [not null]
+  consumption_rate decimal(18,4) [not null]
+  fixed_service_charge decimal(18,2) [not null]
+  vat_rate decimal(5,2) [not null]
+  penalty_rate decimal(5,2) [not null]
+  effective_from date [not null]
+  active boolean [not null, default: true]
+  created_at timestamp [not null]
+  updated_at timestamp
+
+  Indexes {
+    (meter_type, effective_from)
+  }
+}
+
+Table bills {
+  id uuid [pk]
+  bill_reference varchar [unique, not null]
+  customer_id uuid [not null]
+  meter_id uuid [not null]
+  meter_reading_id uuid [unique, not null]
+  tariff_id uuid [not null]
+  billing_month integer [not null]
+  billing_year integer [not null]
+  consumption decimal(18,2) [not null]
+  energy_amount decimal(18,2) [not null]
+  service_charge decimal(18,2) [not null]
+  tax_amount decimal(18,2) [not null]
+  penalty_amount decimal(18,2) [not null, default: 0]
+  total_amount decimal(18,2) [not null]
+  amount_paid decimal(18,2) [not null, default: 0]
+  outstanding_balance decimal(18,2) [not null]
+  status varchar(20) [not null, default: 'PENDING']
+  generated_date date [not null]
+  due_date date [not null]
+  approved_by uuid
+}
+
+Table payments {
+  id uuid [pk]
+  bill_id uuid [not null]
+  amount_paid decimal(18,2) [not null]
+  payment_method varchar(20) [not null]
+  payment_date timestamp [not null]
+  reference varchar
+}
+
+Table otp_tokens {
+  id uuid [pk]
+  email varchar [not null]
+  code varchar(10) [not null]
+  purpose varchar(30) [not null, default: 'LOGIN']
+  expires_at timestamp [not null]
+  used boolean [not null, default: false]
+  created_at timestamp [not null]
+
+  Indexes {
+    email [name: 'idx_otp_email']
+  }
+}
+
+Table notifications {
+  id uuid [pk]
+  customer_id uuid
+  bill_id uuid
+  message text [not null]
+  type varchar(40)
+  status varchar(20) [not null, default: 'PENDING']
+  created_at timestamp [not null]
+}
+
+
+//      RELATIONSHIPS (REFERENCES)
+
+// Many-to-Many Join Table (users <-> roles)
+Ref: user_roles.user_id > users.id
+Ref: user_roles.role_id > roles.id
+
+// User & Meters
+Ref: meters.customer_id > users.id
+
+// Meter Readings
+Ref: meter_readings.meter_id > meters.id
+
+// Bills Relationships
+Ref: bills.customer_id > users.id
+Ref: bills.meter_id > meters.id
+Ref: bills.meter_reading_id > meter_readings.id
+Ref: bills.tariff_id > tariffs.id
+Ref: bills.approved_by > users.id
+
+// Payments
+Ref: payments.bill_id > bills.id
+
+// Notifications
+Ref: notifications.customer_id > users.id
+Ref: notifications.bill_id > bills.id

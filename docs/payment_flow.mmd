@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant U as User
+    participant C as PaymentController
+    participant S as PaymentService
+    participant B as BillRepository
+    participant DB as Database
+
+    U->>C: Payment request
+    C->>S: process payment
+
+    S->>B: fetch bill
+    S->>S: validate amount
+
+    S->>DB: insert payment
+    S->>DB: update bill (paid/partial)
+
+    DB-->>U: confirmation

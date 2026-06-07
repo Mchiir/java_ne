@@ -1,0 +1,9 @@
+flowchart TD
+    BillSaved[Bill Inserted] --> Trigger[DB Trigger fn_notify_on_bill_insert]
+    Trigger --> NotificationTable[(notifications table)]
+
+    BillService --> EmailService
+    EmailService --> User
+
+    NotificationTable --> NotificationController
+    NotificationController --> Client

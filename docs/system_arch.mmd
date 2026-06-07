@@ -1,0 +1,20 @@
+flowchart TD
+    Client[Frontend / API Client]
+
+    subgraph Backend [Spring Boot Backend]
+        C[Controllers]
+        S[Services]
+        R[Repositories]
+        DB[(PostgreSQL)]
+    end
+
+    Auth[JWT Auth Service]
+    Email[Email Service]
+
+    Client --> C
+    C --> S
+    S --> R
+    R --> DB
+
+    S --> Auth
+    S --> Email

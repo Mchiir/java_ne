@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant A as Admin/System
+    participant C as BillController
+    participant S as BillService
+    participant R as MeterReadingRepo
+    participant T as TariffService
+    participant B as BillRepository
+    participant DB as Database
+    participant N as Notification Trigger
+    participant E as EmailService
+
+    A->>C: Generate Bill Request
+    C->>S: generate()
+
+    S->>R: fetch MeterReading
+    S->>T: resolve tariff
+
+    S->>S: calculate charges
+
+    S->>B: save Bill
+    B->>DB: INSERT bills
+
+    DB->>N: trigger fn_notify_on_bill_insert
+    N->>DB: INSERT notification
+
+    S->>E: send bill email

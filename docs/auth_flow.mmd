@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant U as User
+    participant C as AuthController
+    participant S as AuthService
+    participant O as OtpService
+    participant DB as Database
+    participant E as EmailService
+
+    U->>C: Signup / Login request
+    C->>S: process request
+
+    alt Signup
+        S->>DB: create user (email_verified=false)
+        S->>O: generate OTP
+        O->>DB: save OTP
+        O->>E: send OTP email
+        E-->>U: OTP code
+    end
+
+    alt Verify OTP
+        U->>C: submit OTP
+        C->>S: verify OTP
+        S->>DB: mark email_verified=true
+    end
