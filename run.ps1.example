@@ -1,0 +1,7 @@
+# Set environment variables for the application (Replace placeholders with actual values)
+$env:JWT_SECRET="YOUR_JWT_SECRET_KEY_HERE"
+$env:MAIL_USERNAME="your-email@example.com"
+$env:MAIL_PASSWORD="your-app-password-here"
+
+# Run the Spring Boot application
+mvn spring-boot:run
